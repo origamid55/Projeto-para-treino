@@ -1,0 +1,18 @@
+body {
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 20%;
+}
+
+p {
+  font-size: 40px;
+}
+
+.estazero {
+  color:green;
+}
+
+.estanomaximo {
+  color: red;
+}
