@@ -5,26 +5,39 @@ import viteLogo from './assets/vite.svg'
 import './AppCss-Exercicio2.css'
 
 function App() {
+
+
 const [tarefa, setTarefa] = useState([
-
 {id: 1, item: 'texto'}
-
 ]);
 
-function adicionartarefa() {
 
-  setTarefa(...tarefa, {} )
+const [novotexto, setNovotexto] = useState("");
+
+
+function adicionartarefa() {
+  if (novotexto.trim() === "") return;
+
+  setTarefa([...tarefa, {id: Date.now(), item: novotexto}]);
+
+  setNovotexto("");
 
 }
 
   return (
     <>
-  <input></input>
+  <input
+  type='text'
+  placeholder='Digite seu texto aqui...'
+  value={novotexto}
+  onChange={(e) => {setNovotexto(e.target.value)}}
+  />
+
  <button onClick={adicionartarefa}>Adicionar tarefa</button>
 <ul>
-    {lista.map((e) => (
+    {tarefa.map((e) => (
     
-    <li key={e}>{e}</li>
+    <li key={e.id}>{e.item}</li>
     
     ))}
  </ul>   
