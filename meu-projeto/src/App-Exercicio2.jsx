@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './AppCss-Exercicio2.css'
-
+import Itemtarefa from '../components/itemtarefa';
 function App() {
 
 
@@ -21,11 +21,6 @@ function adicionartarefa() {
 
 }
 
-function alterartarefa (e) {
-  if (e === false) return true;
-  if (e === true) return false;
-}
-
   return (
     <>
   <input
@@ -34,17 +29,16 @@ function alterartarefa (e) {
   value={novotexto}
   onChange={(e) => {setNovotexto(e.target.value)}}
   />
-<input type='checkbox'></input>
+
  <button onClick={adicionartarefa}>Adicionar tarefa</button>
 
 
 <ul>
     {tarefa.map((e) => (
-    
-    <li key={e.id}>{e.item}
-    <input type='checkbox' checked={e.concluida} onClick={alterartarefa(e.concluida)}></input>
-    </li>
-    
+      <li>
+      <Itemtarefa texto={e.item}/>
+      <button onClick={() => setTarefa(tarefa.filter((b) => b.id !== e.id))}>x</button>
+      </li>
     ))}
  </ul>   
     
