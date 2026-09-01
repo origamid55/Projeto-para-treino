@@ -21,6 +21,10 @@ function adicionartarefa() {
 
 }
 
+tarefa.map((e) =>
+
+)
+
   return (
     <>
   <input
