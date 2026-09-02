@@ -21,9 +21,16 @@ function adicionartarefa() {
 
 }
 
-tarefa.map((e) =>
-
-)
+function alterartarefa(h) {
+       
+          setTarefa(
+          tarefa.map(
+            (o) => {
+            if(o.id === h) {return {...o, concluida: !o.concluida}} 
+            }
+        ));
+    
+}
 
   return (
     <>
@@ -39,8 +46,9 @@ tarefa.map((e) =>
 
 <ul>
     {tarefa.map((e) => (
-      <li>
-      <Itemtarefa texto={e.item}/>
+      <li key={e.id}>
+      <input type="checkbox" checked={e.concluida} onChange={() => alterarcheck(e.id)}></input>
+      <span>{e.item}</span>
       <button onClick={() => setTarefa(tarefa.filter((b) => b.id !== e.id))}>x</button>
       </li>
     ))}
