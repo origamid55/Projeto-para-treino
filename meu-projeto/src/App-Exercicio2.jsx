@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './AppCss-Exercicio2.css'
 import Itemtarefa from '../components/itemtarefa';
+
+
 function App() {
 
 
@@ -23,12 +25,9 @@ function adicionartarefa() {
 
 function alterartarefa(h) {
        
-          setTarefa(
-          tarefa.map(
-            (o) => {
-            if(o.id === h) {return {...o, concluida: !o.concluida}} 
-            }
-        ));
+          setTarefa(tarefa.map((o) => 
+            o.id === h ? {...o, concluida: !o.concluida} : o  
+          ));
     
 }
 
@@ -47,8 +46,8 @@ function alterartarefa(h) {
 <ul>
     {tarefa.map((e) => (
       <li key={e.id}>
-      <input type="checkbox" checked={e.concluida} onChange={() => alterarcheck(e.id)}></input>
-      <span>{e.item}</span>
+      <input type="checkbox" checked={e.concluida} onChange={() => alterartarefa(e.id)}/>
+      <span style={{ textDecoration: e.concluida ? 'line-through' : 'none'}}>{e.item}</span>
       <button onClick={() => setTarefa(tarefa.filter((b) => b.id !== e.id))}>x</button>
       </li>
     ))}
