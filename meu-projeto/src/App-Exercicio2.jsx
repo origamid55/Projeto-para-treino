@@ -31,6 +31,8 @@ function alterartarefa(h) {
     
 }
 
+const [filtro, setFiltro] = useState("todas");
+
   return (
     <>
   <input
@@ -41,10 +43,24 @@ function alterartarefa(h) {
   />
 
  <button onClick={adicionartarefa}>Adicionar tarefa</button>
-
+ <select value={filtro} onChange={(e) => setFiltro(e.target.value)}>
+  <option value='todas'>Todas</option>
+  <option value='concluida'>Concluidas</option>
+  <option value='pendente'>Pendentes</option>
+ </select>
 
 <ul>
-    {tarefa.map((e) => (
+    {tarefa.filter((y) => {
+
+      switch (filtro) {
+        case 'pendente': return y.concluida == false;
+       
+        case 'concluida': return y.concluida == true;
+      
+        default: return true;
+      }
+    
+    }).map((e) => (
       <li key={e.id}>
       <input type="checkbox" checked={e.concluida} onChange={() => alterartarefa(e.id)}/>
       <span style={{ textDecoration: e.concluida ? 'line-through' : 'none'}}>{e.item}</span>
