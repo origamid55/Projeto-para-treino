@@ -8,6 +8,8 @@ const [form, setForm] = useState({
   senha: ''
 });
 // Dica do padrão de atualização imutável com e.target.name:
+
+
 const handleChange = (e) => {
   const { name, value } = e.target;
   setForm((prevForm) => ({
@@ -16,9 +18,13 @@ const handleChange = (e) => {
   }));
 };
 
+const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const emailValidacao = regexEmail.test(form.email);
+
+
   return (
     <>
-    <form >
+    <form>
   <div>
     <label>Nome:</label>
     <input 
@@ -38,7 +44,8 @@ const handleChange = (e) => {
       value={form.email} 
       onChange={handleChange} 
     />
-    {}
+    {form.email.trim().length > 0 && !emailValidacao && <span>Escreva um email valido</span>}
+
   </div>
 
   <div>

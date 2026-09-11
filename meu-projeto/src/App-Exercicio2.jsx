@@ -33,6 +33,27 @@ function alterartarefa(h) {
 
 const [filtro, setFiltro] = useState("todas");
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <>
   <input
@@ -43,6 +64,7 @@ const [filtro, setFiltro] = useState("todas");
   />
 
  <button onClick={adicionartarefa}>Adicionar tarefa</button>
+ 
  <select value={filtro} onChange={(e) => setFiltro(e.target.value)}>
   <option value='todas'>Todas</option>
   <option value='concluida'>Concluidas</option>
