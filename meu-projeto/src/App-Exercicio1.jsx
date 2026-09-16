@@ -13,8 +13,8 @@ const [aviso, setAviso] = useState('');
     }}>+</button>
     
     <button onClick={() => {
-      `${numero > 0 && setNumero((e) => e-1)} 
-      ${numero === 10 && setAviso('')}`
+      if (numero === 10) setAviso('')
+      if (numero > 0) setNumero((e) => e-1)
     }}>-</button>
 ;
     
