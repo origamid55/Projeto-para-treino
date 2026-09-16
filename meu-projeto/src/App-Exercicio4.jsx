@@ -7,7 +7,6 @@ const [form, setForm] = useState({
   email: '',
   senha: ''
 });
-// Dica do padrão de atualização imutável com e.target.name:
 
 
 const handleChange = (e) => {
@@ -16,15 +15,24 @@ const handleChange = (e) => {
     ...prevForm,
     [name]: value // Chave dinâmica!
   }));
+  
 };
 
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const emailValidacao = regexEmail.test(form.email);
 
+const handleSubmit = (e) => {
+  
+  alert('formulario enviado');
+  e.preventDefault();
+
+
+};
+
 
   return (
     <>
-    <form>
+    <form onSubmit={handleSubmit}>
   <div>
     <label>Nome:</label>
     <input 
@@ -33,8 +41,10 @@ const emailValidacao = regexEmail.test(form.email);
       value={form.nome} 
       onChange={handleChange} 
     />
-    {(form.nome.trim().length < 3 && form.nome.trim().length > 0) && <span>Digite mínimo de 3 caracteres</span>}
+    {(form.nome.trim().length < 3 && form.nome.trim().length > 0) && <span>Digite mínimo de 3 caracteres</span> }
   </div>
+
+
 
   <div>
     <label>E-mail:</label>
@@ -59,7 +69,11 @@ const emailValidacao = regexEmail.test(form.email);
     {(form.senha.trim().length < 6 && form.senha.trim().length > 0) && <span>Digite mínimo de 6 caracteres</span>}
   </div>
 
-  <button type="submit" >
+
+
+
+  <button type="submit" disabled={!(form.nome.trim().length > 2 && 
+emailValidacao  && form.senha.trim().length > 5)}>
     Cadastrar
   </button>
 </form>
