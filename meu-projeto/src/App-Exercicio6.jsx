@@ -3,26 +3,29 @@ import './AppCss-Exercicio3.css'
 
 function App() {
 const [carregando, setCarregando] = useState(false);
-
-useEffect(
+const [erro, setErro] = useState(false);
+useEffect( () => {
   async function api() {
       try {
         setCarregando(true);
-    await const resposta = fetch(`https://jsonplaceholder.typicode.com/users`);
+     const resposta = await fetch(`https://jsonplaceholder.typicode.com/users`);
         if (!resposta.ok) {
             return ;
          }
          setCarregando(false);
-    await const dados = resposta.json();
+    const dados = await resposta.json();
      
       }
-      catch (erro) {
+      catch (erro2) {
         const dados = false;
+        erro = erro2;
       }finally {
         setCarregando(false);
       }
       
     }
+    api();
+  }
  , [])
      return (
     <>
@@ -31,15 +34,16 @@ useEffect(
 
 <ul>
   {dados.map((e) => (
- <div key={e.id}>   
-    <li>{e.nome}</li>
-    <li>{e.email}</li>
-  </div>
+ <li key={e.id}>   
+    Nome: {e.name}
+    Email: {e.email}
+    Emprese: {e.company.name}
+  </li>
     ))
 } 
 </ul>
 
-{!dados && <p>Erro no servidor</p>}   
+{!dados && <p>Erro no servidor. Mensagem {erro}</p>}   
 
     </>
   )
