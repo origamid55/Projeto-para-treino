@@ -2,23 +2,26 @@ import { useEffect, useState } from 'react'
 import './AppCss-Exercicio3.css'
 
 function App() {
+
 const [carregando, setCarregando] = useState(false);
 const [erro, setErro] = useState(false);
+const [dados, setDados] = useState('');
+
 useEffect( () => {
   async function api() {
       try {
         setCarregando(true);
-     const resposta = await fetch(`https://jsonplaceholder.typicode.com/users`);
+     const resposta = await fetch(`https://jsonplaceholder.typicode.com/sers`);
         if (!resposta.ok) {
-            return ;
+            throw new Error('Página ou recurso não encontrado (Erro 404)');
          }
-         setCarregando(false);
-    const dados = await resposta.json();
+      const dados1 = await resposta.json();
+      setDados(dados1);
      
       }
       catch (erro2) {
-        const dados = false;
-        erro = erro2;
+        setErro(erro2);
+        setDados(false);
       }finally {
         setCarregando(false);
       }
@@ -30,20 +33,20 @@ useEffect( () => {
      return (
     <>
 {carregando && <p>Carregando...</p>}
-{dados  ?
+{dados &&
 
 <ul>
   {dados.map((e) => (
  <li key={e.id}>   
     Nome: {e.name}
     Email: {e.email}
-    Emprese: {e.company.name}
+    Empresa: {e.company.name}
   </li>
     ))
 } 
 </ul>
-
-{!dados && <p>Erro no servidor. Mensagem {erro}</p>}   
+}
+{erro && <p>Erro no servidor. Mensagem: {erro}</p>}   
 
     </>
   )
