@@ -22,7 +22,7 @@ cronometro.current = null;
 }
 
 function resetar(){
-  
+
   clearInterval(cronometro.current);
   cronometro.current = null;  
   setNumero(0);
@@ -30,7 +30,7 @@ function resetar(){
 }
 return (
     <>
-{numero} 
+{ String(Math.floor(numero / 60)).padStart(2, '0') } : { String(numero % 60).padStart(2, '0') }
 <br></br>
 <br></br>
 <button onClick={iniciarCronometro}>Iniciar</button>
